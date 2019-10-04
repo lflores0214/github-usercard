@@ -25,10 +25,13 @@
 */
 const cards = document.querySelector(".cards");
 
-axios.get("https://api.github.com/users/lflores0214").then(response => {
-  console.log(response);
-  cards.appendChild(userCards(response.data));
-});
+axios
+  .get("https://api.github.com/users/lflores0214")
+  .then(response => {
+    console.log(response);
+    cards.appendChild(userCards(response.data));
+  })
+  .catch(error => console.log(error));
 
 const followersArray = [
   "Cireimu",
@@ -38,14 +41,17 @@ const followersArray = [
   "bschatzj"
 ];
 
-// followersArray.forEach(el => {
-//   axios.get(`https://api.github.com/users/${el}`).then(response => {
-//     console.log(response);
-//     const cards = document.querySelector(".cards");
-//     const card = userCards(response.data);
-//     cards.appendChild(card);
-//   });
-// });
+followersArray.forEach(el => {
+  axios
+    .get(`https://api.github.com/users/${el}`)
+    .then(response => {
+      console.log(response);
+      const cards = document.querySelector(".cards");
+      const card = userCards(response.data);
+      cards.appendChild(card);
+    })
+    .catch(error => console.log(error));
+});
 
 const followersArray2 = [];
 
@@ -61,7 +67,8 @@ axios
         cards.appendChild(card);
       });
     });
-  });
+  })
+  .catch(error => console.log(error));
 console.log(followersArray2);
 
 // followersArray2.forEach(el => {
